@@ -1,6 +1,7 @@
 
 # GSoC 2017 Proposal to Kivy (Python Software Foundation)
 
+
 **Project: KV Compiler: A compiler for the KV language**
 
 ## Table of Contents
@@ -86,9 +87,7 @@ Current implementation of compiler use three phase batch binding:-
  2. The middle phase or binding phase creates bindings for all the rules for binding for the calling of bindings it used `__delayed_call_fn` to bind the rules in iterative.
  3. Final post initialisation phase, all the property rules are re-evaluated, all the `on_prop` observer are triggered, then all child widget dispatch event `on_kv_apply` indicating all the rules are done being applied, finally root widget dispatches `on_kv_apply` to itself.
 
-This sets of bindings stop unnecessary dispatching and updation of property during creation of widgets but
-
-// Only Beneficial for the on_parent call
+This sets of bindings stop unnecessary dispatching and updation of property during creation of widgets. Batch Binding helps to remove any intermediate dispatching but in case there isn't any intermediate value of rules batch binding works heavy in comparison to past implementation.
 
 #### Discussion
 I initially wanted to implement my proposal with keeping optimisation as upmost priority.  However, after talks with Matthew and Dessant, it soon turned out that this was not a correct approach to move forward. As such, this proposal currently takes consistency with optimisation approach, The main idea of this approach is that the existing functionality related work should occur first with succeeded by implementing binding and optimisation and finally testing and documentation.
@@ -123,6 +122,7 @@ This phase would largely be a follow-up of the first two phases, especially the 
 There are ways by which KV Compiler can work with real live project, We can compile all `.kv` files at execution of Kivy Code into a folder recursively or user can override this by giving path of all `.kv` files to be compiled in `Class(App)` or somewhere in main `.py` which initiate the execution of the Kivy App.
 
 Remaining compatibility issues, if they arise, will also be dealt with during this phase. The proposal would be finished off with a final update to the documentation. Also, stop printing error traceback if error is based on `.kv lang` when kivy is not running in development mode.
+
 #### Additional Goals
 *These are `Post-GSoC` goals. I haven't work on how to implement them. These goals can be added in compiler in future. This is just basic description of implementation.*
 
@@ -141,14 +141,14 @@ I haven't think much on this part but can worked on it with help of selectors as
 #### Pre-GSoC + Community Bonding Period
 For understanding KVCompiler I need to understand all three Cython, Python, and Kivy with kivy bindings and widget behaviours for which I will be learning more about Cython, Kivy Event Dispatcher and Bindings with also optimisation of Compiler.
 
-I will be reading about these, gain more knowledge of all and will go through required documentations (Mentioned in “References” below). 
+I will be reading about these, gain more knowledge of all and will go through required documentations (Mentioned in “References” below).
 
 I will be in constant touch with my mentors and take suggestions. During this time, if my mentor thinks that I am ready to start programming then I will start working on [Phase I](#phase-i-working-with-existing-functionality).
 
 #### Week 1 and Week 2 (May 30 – June 13)
 ##### Specific Goals
  * Rebase the work done on compiler till now with `master` branch as an initiation to Phase I.
- * Start writing some kivy code which will covers all the aspect of `Kivy` which will help in testing of current compiler or with updates that will be done in `Phase II`.
+ * Start writing some kivy code which will covers all the aspect of `Kivy` which will help in testing of current compiler or with updates that will be done in `Phase II`
 ##### Side Goals
  * Discuss optimisation technique that needs to be worked in initial aspect of `Phase II`.
  * Documentation will be done for already implemented modules (will also help in future goals). 
@@ -156,6 +156,7 @@ I will be in constant touch with my mentors and take suggestions. During this ti
 ##### Specific Goals
  * Testing already written modules of compiler and updating any modules.
  * Benchmark the results obtained from testing, and make changes to the Phase II work approaches if required.
+ * Using benchmark mark to decide whether to continue with batch binding or not.
 ##### Side Goals
  * Will start working on [Phase II](#phase-ii-implementing-binding-and-optimisation) (subject to the availability of time and if mentor thinks).
  * Make Preparation for the [Phase I](#phase-i-working-with-existing-functionality) evaluation with completion of documentation.
