@@ -99,6 +99,7 @@ Currently, `kv-compiler` has already progressed quite far, it's in pre-alpha sta
 In this phase, the idea, basically is to refurbish (completely or partially) all the method that are already implemented in `KVCompiler` and `lang.py`. As such, no new functionality is expected to be implemented in `Compiler Front End` (Line reconstruction, Lexical analysis, Preprocessing, Syntax analysis, Semantic analysis). Current, alpha stage PR has conflicts that has be to resolved to rebase it with the current kivy development branch. Compiler has some bugs in showing syntax or id error in `.kv` code that has to solved to help developer find bugs in his/her code. 
 
 > For example:  If there is some unknown id in .kv code instead of showing `Error: id not found` it's show traceback with error `NameError: global name 'level' is not defined`.
+> 
 > **Link:** https://gist.github.com/manthansharma/18fccae332e9dbbe0dd0c9caf33f7366
 
 There are some small bugs like this which can be solved with some tweaks and changes in compiler code.
